@@ -14,6 +14,7 @@ Esta es una API REST sencilla construida con Spring Boot que permite gestionar e
 *   Java 17 o superior.
 *   Maven.
 *   Una base de datos MySQL en ejecución.
+*   [Docker](https://www.docker.com/) y [Docker Compose](https://docs.docker.com/compose/) (Recomendado).
 *   Una herramienta para probar APIs como [Postman](https://www.postman.com/) o ApiDog.
 
 ## Configuración
@@ -30,6 +31,21 @@ Esta es una API REST sencilla construida con Spring Boot que permite gestionar e
     mvn spring-boot:run
     ```
     La API estará disponible en `http://localhost:8080`.
+
+---
+
+## Configuración Alternativa con Docker
+
+Si prefieres no instalar MySQL manualmente, puedes usar el archivo `docker-compose.yml` incluido en el proyecto para levantar la base de datos.
+
+1.  Asegúrate de tener Docker y Docker Compose instalados.
+2.  Desde la raíz del proyecto, ejecuta el siguiente comando en tu terminal:
+    ```sh
+    docker-compose up -d
+    ```
+    Este comando creará y ejecutará un contenedor de MySQL en segundo plano. La base de datos estará disponible en `localhost:3307` con todo lo necesario para que la aplicación se conecte automáticamente.
+
+> Con este método, puedes ignorar el paso 1 de la sección de configuración manual.
 
 ---
 
