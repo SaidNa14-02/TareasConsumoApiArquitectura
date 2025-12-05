@@ -49,7 +49,7 @@ public class TrainerService {
                 .orElseThrow(() -> new RuntimeException("Entrenador no encontrado con ID: " + trainerId));
     }
     
-    public Trainer removePokemonFromTrainer(Long trainerId, String pokemonName){
+    public void removePokemonFromTrainer(Long trainerId, String pokemonName){
         Trainer trainer = getTrainerById(trainerId);
 
         Pokemon pokemonToRemove = trainer.getPokemonList().stream()
@@ -58,10 +58,24 @@ public class TrainerService {
                 .orElseThrow(()-> new RuntimeException("El entrenador no tiene registrado el pokemon con nombre: " + pokemonName));
 
         trainer.removePokemonFromList(pokemonToRemove);
-        return trainerRepository.save(trainer);
+        trainerRepository.save(trainer);
     }
 
     public List<Trainer> findAllTrainers(){
         return trainerRepository.findAll();
+    }
+
+    public void editTrainerData(Long trainerId, String updatedName){
+        Optional<Trainer> optionalTrainer = trainerRepository.findById(trainerId);
+        if(optionalTrainer.isEmpty()){
+            throw  new RuntimeException("Entrenador no encontrado con ID: " + trainerId);
+        }
+        if(updatedName == null || updatedName.isBlank()){
+            throw new RuntimeException("Nombre del entrenador no puede estar vacio");
+        }
+
+        Trainer trainer = optionalTrainer.get();
+        trainer.setName(updatedName);
+        trainerRepository.save(trainer);
     }
 }

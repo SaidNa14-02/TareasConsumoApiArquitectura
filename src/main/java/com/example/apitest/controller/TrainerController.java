@@ -69,4 +69,17 @@ public class TrainerController {
         }
     }
 
+    @PutMapping("/{trainerId}")
+    public ResponseEntity<Trainer> updateTrainerData (
+            @PathVariable Long trainerId,
+            @RequestBody String name
+    ){
+        try {
+            trainerService.editTrainerData(trainerId, name);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        catch (RuntimeException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }
