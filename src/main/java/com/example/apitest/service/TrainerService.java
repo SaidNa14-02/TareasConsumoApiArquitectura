@@ -65,7 +65,7 @@ public class TrainerService {
         return trainerRepository.findAll();
     }
 
-    public void editTrainerData(Long trainerId, String updatedName){
+    public Trainer editTrainerData(Long trainerId, String updatedName){
         Optional<Trainer> optionalTrainer = trainerRepository.findById(trainerId);
         if(optionalTrainer.isEmpty()){
             throw  new RuntimeException("Entrenador no encontrado con ID: " + trainerId);
@@ -77,5 +77,6 @@ public class TrainerService {
         Trainer trainer = optionalTrainer.get();
         trainer.setName(updatedName);
         trainerRepository.save(trainer);
+        return trainer;
     }
 }

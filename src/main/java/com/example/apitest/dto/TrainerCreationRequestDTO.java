@@ -1,6 +1,5 @@
 package com.example.apitest.dto;
 
-// Esta clase es un "molde" para el JSON que envías en la petición POST.
 public class TrainerCreationRequestDTO {
     private String name;
 

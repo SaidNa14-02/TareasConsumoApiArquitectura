@@ -1,6 +1,7 @@
 package com.example.apitest.controller;
 
 import com.example.apitest.Trainer;
+import com.example.apitest.dto.PokemonRequestDTO;
 import com.example.apitest.service.TrainerService;
 import com.example.apitest.dto.TrainerCreationRequestDTO;
 import org.springframework.http.HttpStatus;
@@ -36,9 +37,9 @@ public class TrainerController {
     @PostMapping("/{trainerId}/pokemon")
     public ResponseEntity<Trainer> assignPokemonToTrainer(
             @PathVariable Long trainerId,
-            @RequestBody String pokemonName) {
+            @RequestBody PokemonRequestDTO request) {
         try {
-            Trainer updatedTrainer = trainerService.assignPokemonToTrainer(trainerId, pokemonName);
+            Trainer updatedTrainer = trainerService.assignPokemonToTrainer(trainerId, request.getPokemonName());
             return ResponseEntity.ok(updatedTrainer);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -72,11 +73,11 @@ public class TrainerController {
     @PutMapping("/{trainerId}")
     public ResponseEntity<Trainer> updateTrainerData (
             @PathVariable Long trainerId,
-            @RequestBody String name
+            @RequestBody TrainerCreationRequestDTO request
     ){
         try {
-            trainerService.editTrainerData(trainerId, name);
-            return ResponseEntity.status(HttpStatus.OK).build();
+            Trainer updatedTrainer = trainerService.editTrainerData(trainerId, request.getName());
+            return ResponseEntity.ok(updatedTrainer);
         }
         catch (RuntimeException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

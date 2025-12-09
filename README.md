@@ -63,7 +63,7 @@ A continuación se detalla cómo probar cada endpoint.
 ### 2. Crear un nuevo entrenador
 
 *   **Acción:** Registra un nuevo entrenador en la base de datos.
-*   **Method:** `POST`
+*   **Método:** `POST`
 *   **URL:** `http://localhost:8080/api/trainers`
 *   **Body:** `JSON`
     ```json
@@ -77,10 +77,11 @@ A continuación se detalla cómo probar cada endpoint.
 *   **Acción:** Busca un Pokémon en la PokeAPI y lo asigna a un entrenador existente.
 *   **Método:** `POST`
 *   **URL:** `http://localhost:8080/api/trainers/1/pokemon` (reemplaza `1` por el ID del entrenador).
-*   **Body:** `Texto Plano (raw/text)`
-    > **Importante:** El cuerpo de esta petición no es JSON, es simplemente el nombre del Pokémon como texto.
-    ```
-    pikachu
+*   **Body:** `JSON`
+    ```json
+    {
+        "pokemonName": "pikachu"
+    }
     ```
 
 ### 4. Obtener un entrenador por su ID
@@ -96,3 +97,14 @@ A continuación se detalla cómo probar cada endpoint.
 *   **Método:** `DELETE`
 *   **URL:** `http://localhost:8080/api/trainers/1/pokemon/pikachu` (reemplaza `1` por el ID del entrenador y `pikachu` por el nombre del Pokémon a eliminar).
 *   **Body:** Ninguno.
+
+### 6. Editar el nombre del entrenador
+* **Acción:** Edita el nombre del entrenador basado en su id.
+* **Método:** `PUT`
+* **URL:** `http://localhost:8080/api/trainers/1` (reemplaza `1` por el ID del entrenador).
+* **Body:** `JSON`
+    ```json
+    {
+        "name": "Brock"
+    }
+    ```
